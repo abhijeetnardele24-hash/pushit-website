@@ -240,7 +240,7 @@ body.light-theme .moon-icon { display: none; }
 .image-container {
   border-radius: 12px;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  /* Removed aspect-ratio to prevent cropping */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -256,6 +256,7 @@ body.light-theme .moon-icon { display: none; }
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 100px 0; /* Add padding back for the placeholder since we removed aspect-ratio */
 }
 .image-placeholder .sub-text {
   font-size: 0.85rem;
@@ -264,7 +265,69 @@ body.light-theme .moon-icon { display: none; }
   font-family: var(--font-mono);
 }
 
-/* 6. Problem Architecture Section */
+.dashboard-img {
+  width: 100%;
+  height: auto; /* Let the image scale naturally */
+  display: block;
+  border-radius: 10px;
+}
+
+/* 6. Statement Cards Section */
+.statement-cards {
+  padding: 40px 0 60px;
+}
+.statement-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+@media (min-width: 900px) {
+  .statement-grid {
+    grid-template-columns: 1.3fr 1fr;
+  }
+}
+.statement-card {
+  position: relative;
+  border-radius: 16px;
+  padding: 50px 40px 100px 40px; /* Extra bottom padding for the icon */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+.statement-card blockquote {
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.04em;
+  color: #111827; /* Force dark text regardless of theme */
+  margin: 0;
+}
+.card-icon {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  color: #111827;
+}
+
+/* Blue Card Specifics */
+.blue-card {
+  background: linear-gradient(135deg, #e4edff 0%, #ffffff 100%);
+}
+.blue-card::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background: radial-gradient(circle at right bottom, rgba(255,255,255,0.8) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Lime Card Specifics */
+.lime-card {
+  background: #d9f826;
+}
+
+/* 7. Problem Architecture Section */
 .architecture {
   padding: 80px 0 40px;
   text-align: center;
