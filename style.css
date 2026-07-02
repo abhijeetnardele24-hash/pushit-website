@@ -1,0 +1,450 @@
+:root {
+  /* DARK THEME (Strict Enterprise) */
+  --bg-main: #020202;
+  --bg-glass: rgba(20, 20, 20, 0.4);
+  --bg-glass-hover: rgba(30, 30, 30, 0.6);
+  --border-glass: rgba(255, 255, 255, 0.06);
+  --border-glass-highlight: rgba(255, 255, 255, 0.15);
+  
+  --text-primary: #EDEDED;
+  --text-secondary: #888888;
+  --text-gradient: linear-gradient(180deg, #FFFFFF 0%, #A0A0A0 100%);
+  
+  --hero-shadow: rgba(0,0,0,0.5);
+  
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', Menlo, Monaco, Consolas, monospace;
+}
+
+/* LIGHT THEME VARIABLES */
+body.light-theme {
+  --bg-main: #F4F4F5;
+  --bg-glass: rgba(255, 255, 255, 0.6);
+  --bg-glass-hover: rgba(255, 255, 255, 0.9);
+  --border-glass: rgba(0, 0, 0, 0.05);
+  --border-glass-highlight: rgba(0, 0, 0, 0.15);
+  
+  --text-primary: #18181B;
+  --text-secondary: #52525B;
+  --text-gradient: linear-gradient(180deg, #18181B 0%, #52525B 100%);
+  
+  --hero-shadow: rgba(0,0,0,0.05);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  position: relative;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* 1. Precision Grid Background */
+.grid-background {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: 
+    linear-gradient(to right, var(--border-glass) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border-glass) 1px, transparent 1px);
+  background-size: 60px 60px;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+.container {
+  max-width: 1000px; /* Tighter layout for enterprise feel */
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* 2. True Glassmorphism Mixin */
+.glass-panel {
+  background: var(--bg-glass);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border-glass);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02), 0 8px 32px var(--hero-shadow);
+  transition: all 0.3s ease;
+}
+
+/* 3. Navigation */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid var(--border-glass);
+  border-radius: 0;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+}
+
+.logo {
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+}
+
+nav a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  margin-left: 28px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+nav a:hover {
+  color: var(--text-primary);
+}
+
+.glass-button {
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: 6px;
+  padding: 6px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  margin-left: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.glass-button:hover {
+  background: var(--bg-glass-hover);
+  color: var(--text-primary);
+  border-color: var(--border-glass-highlight);
+}
+
+/* Hide sun in light mode, moon in dark mode */
+body:not(.light-theme) .sun-icon { display: none; }
+body.light-theme .moon-icon { display: none; }
+
+/* 4. Hero Section */
+.hero {
+  padding: 100px 0 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Pill Badge */
+.badge-wrapper {
+  margin-bottom: 32px;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+.badge-icon {
+  display: flex;
+  color: var(--text-primary);
+}
+
+/* Typography */
+.hero-headline {
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  background: var(--text-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-subheadline {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  color: var(--text-secondary);
+  max-width: 650px;
+  margin: 0 auto 48px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* Interactive CTA */
+.hero-cta {
+  margin-bottom: 80px;
+}
+.install-box {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 8px;
+  padding: 14px 24px;
+  cursor: pointer;
+}
+.install-box:hover {
+  background: var(--bg-glass-hover);
+  border-color: var(--border-glass-highlight);
+}
+.prompt {
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  margin-right: 12px;
+}
+.command {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  margin-right: 24px;
+}
+.copy-icon {
+  color: var(--text-secondary);
+  display: flex;
+}
+.install-box:hover .copy-icon {
+  color: var(--text-primary);
+}
+
+/* 5. Vacant Image Wrapper (Glassmorphism Frame) */
+.hero-image-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.image-container {
+  border-radius: 12px;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 2px; /* Inner frame */
+}
+
+.image-placeholder {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.image-placeholder .sub-text {
+  font-size: 0.85rem;
+  margin-top: 8px;
+  opacity: 0.6;
+  font-family: var(--font-mono);
+}
+
+/* 6. Problem Architecture Section */
+.architecture {
+  padding: 80px 0 40px;
+  text-align: center;
+}
+.arch-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 60px;
+  border-radius: 12px;
+}
+.arch-title {
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+  color: var(--text-primary);
+}
+.arch-desc {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+.arch-desc code {
+  font-family: var(--font-mono);
+  background: rgba(128, 128, 128, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--border-glass);
+}
+.highlight-desc {
+  font-weight: 500;
+  color: var(--text-primary);
+  font-size: 1.15rem;
+}
+
+/* 7. Capabilities Grid */
+.capabilities {
+  padding: 60px 0 100px;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.section-header h2 {
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  margin-bottom: 12px;
+}
+.section-header p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+@media (min-width: 768px) {
+  .feature-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.feature-card {
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-glass-highlight);
+  background: var(--bg-glass-hover);
+}
+
+.card-content {
+  padding: 32px 24px;
+  height: 100%;
+}
+
+.feature-icon {
+  margin-bottom: 24px;
+  color: var(--text-primary);
+}
+
+.feature-card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+.feature-card p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* 8. Star on GitHub CTA */
+.cta-section {
+  padding: 40px 0 100px;
+}
+.cta-box {
+  border-radius: 16px;
+  padding: 80px 24px;
+  text-align: center;
+}
+.cta-content {
+  position: relative;
+  z-index: 1;
+}
+.cta-content h2 {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+}
+.cta-content p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin-bottom: 32px;
+}
+.github-star-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--text-primary);
+  color: var(--bg-main);
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.github-star-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+/* 9. Footer */
+footer {
+  padding: 30px 0;
+}
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-logo {
+  font-weight: 600;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+}
+.copyright {
+  color: var(--text-secondary);
+  opacity: 0.6;
+  font-size: 0.85rem;
+}
+
+/* 10. Animations */
+.fade-in {
+  opacity: 0;
+  transform: translateY(15px);
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
